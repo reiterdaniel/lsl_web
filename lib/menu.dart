@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lsl_web/gallary.dart';
+import 'package:lsl_web/home.dart';
 import 'package:lsl_web/main.dart';
 
 class SideMenu extends StatefulWidget {
@@ -38,7 +39,7 @@ class _SideMenuState extends State<SideMenu> {
         children: [
           Container(color: Colors.white),
           Container(
-            margin: EdgeInsets.all(8.0),
+            margin: const EdgeInsets.all(8.0),
             height: MediaQuery.of(context).size.height,
             width: 101.0,
             decoration: BoxDecoration(
@@ -56,7 +57,7 @@ class _SideMenuState extends State<SideMenu> {
                                 setState(() {
                                   select(icon.indexOf(e));
                                   if (e == Feather.image) {
-                                    context.go("/gallary");
+                                    context.go('gallary');
                                   }
                                 });
                               }))
