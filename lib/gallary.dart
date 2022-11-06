@@ -12,10 +12,9 @@ class Gallary extends StatelessWidget {
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
       primary: false,
+      // ignore: prefer_const_literals_to_create_immutables
       children: <Widget>[
-        Container(
-          child: const Image(image: AssetImage("graphics/test1.jpeg")),
-        )
+        const Image(image: AssetImage("../graphics/test1.jpg"))
       ],
     );
   }

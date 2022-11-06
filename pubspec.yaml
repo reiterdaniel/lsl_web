@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   go_router: ^5.0.5
   flutter_vector_icons: ^2.0.0
+  fluttertoast: ^8.1.1
 
 dev_dependencies:
   flutter_test:

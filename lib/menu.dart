@@ -11,7 +11,7 @@ class SideMenu extends StatefulWidget {
   State<SideMenu> createState() => _SideMenuState();
 }
 
-List<bool> selected = [true, false, false, false, false];
+List<bool> selectedIcon = [true, false, false, false, false];
 
 class _SideMenuState extends State<SideMenu> {
   List<IconData> icon = [
@@ -25,17 +25,20 @@ class _SideMenuState extends State<SideMenu> {
   void select(int n) {
     for (int i = 0; i < 5; i++) {
       if (i == n) {
-        selected[i] = true;
+        selectedIcon[i] = true;
       } else {
-        selected[i] = false;
+        selectedIcon[i] = false;
       }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
+    return Drawer(
+      width: 130.0,
+      elevation: 0.0,
+      backgroundColor: Colors.white,
+      child: Stack(
         children: [
           Container(color: Colors.white),
           Container(
@@ -52,13 +55,13 @@ class _SideMenuState extends State<SideMenu> {
                       children: icon
                           .map((e) => NavbarItem(
                               icon: e,
-                              selected: selected[icon.indexOf(e)],
+                              selected: selectedIcon[icon.indexOf(e)],
                               onTap: () {
                                 setState(() {
                                   select(icon.indexOf(e));
-                                  if (e == Feather.image) {
-                                    context.go('gallary');
-                                  }
+                                  /*if (e == Feather.image) {
+                                    context.go('/gallary');
+                                  }*/
                                 });
                               }))
                           .toList(),
