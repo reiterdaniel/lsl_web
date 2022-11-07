@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:go_router/go_router.dart';
 import 'package:lsl_web/gallary.dart';
-import 'package:lsl_web/home.dart';
-import 'package:lsl_web/main.dart';
 
 class SideMenu extends StatefulWidget {
   const SideMenu({super.key});
@@ -14,6 +11,8 @@ class SideMenu extends StatefulWidget {
 List<bool> selectedIcon = [true, false, false, false, false];
 
 class _SideMenuState extends State<SideMenu> {
+  GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
   List<IconData> icon = [
     Feather.home,
     Feather.image,
@@ -35,6 +34,7 @@ class _SideMenuState extends State<SideMenu> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      //replace with scafold when drawer doesnt needed
       width: 130.0,
       elevation: 0.0,
       backgroundColor: Colors.white,
@@ -59,9 +59,9 @@ class _SideMenuState extends State<SideMenu> {
                               onTap: () {
                                 setState(() {
                                   select(icon.indexOf(e));
-                                  /*if (e == Feather.image) {
-                                    context.go('/gallary');
-                                  }*/
+                                  if (e == Feather.image) {
+                                    Navigator.pushNamed(context, "/gallary");
+                                  }
                                 });
                               }))
                           .toList(),

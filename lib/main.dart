@@ -4,13 +4,14 @@ import 'package:lsl_web/menu.dart';
 import 'package:lsl_web/gallary.dart';
 import 'package:go_router/go_router.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
-void main() => runApp(App());
+void main() => runApp(App(key: const Key("MyApp")));
+
+class GlobalContextService {
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+}
 
 class App extends StatelessWidget {
-  final GlobalKey<NavigatorState> _navigator = GlobalKey<NavigatorState>();
-
   /// Creates an [App].
   App({Key? key}) : super(key: key);
 
@@ -19,15 +20,34 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: StartPage());
+    return MaterialApp(
+        navigatorKey: GlobalContextService.navigatorKey,
+        initialRoute: "/",
+        routes: {
+          //"/": (context) => StartPage(key: key),
+          "/gallary": (context) => Gallary(key: key)
+        },
+        home: StartPage(key: key),
+        builder: (context, child) {
+          if (child == null) {
+            return Overlay(initialEntries: [
+              OverlayEntry(
+                  builder: ((context) => const LayoutTemplate(
+                      child: ErrorScreen(error: FormatException()))))
+            ]);
+          } else {
+            return Overlay(initialEntries: [
+              OverlayEntry(builder: ((context) => SideMenu()))
+            ]);
+          }
+        });
   }
 }
 
-// ignore: must_be_immutable
-class StartPage extends StatelessWidget {
-  StartPage({super.key});
+class LayoutTemplate extends StatelessWidget {
+  final Widget child;
 
-  late var shownSideMenu = false;
+  const LayoutTemplate({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +55,36 @@ class StartPage extends StatelessWidget {
       backgroundColor: Colors.white,
       drawerScrimColor:
           Colors.transparent, //removes shadow from expanding side menu
-      extendBodyBehindAppBar: true,
+      //extendBodyBehindAppBar: true,
+      drawer: SideMenu(key: GlobalContextService.navigatorKey),
+      appBar: AppBar(
+        foregroundColor: Colors.amberAccent,
+        surfaceTintColor: Colors.amber,
+        //leading: const Icon(Feather.menu, color: Colors.amberAccent),
+        elevation: 0.0,
+        backgroundColor: Colors.white,
+      ),
+      body: Column(
+        children: <Widget>[
+          //NavigationBar(),
+          Expanded(child: child)
+        ],
+      ),
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class StartPage extends StatelessWidget {
+  const StartPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      drawerScrimColor:
+          Colors.transparent, //removes shadow from expanding side menu
+      //extendBodyBehindAppBar: true,
       drawer: const SideMenu(),
       appBar: AppBar(
         foregroundColor: Colors.amberAccent,
@@ -48,7 +97,7 @@ class StartPage extends StatelessWidget {
   }
 }
 
-class Start extends StatelessWidget {
+/*class Start extends StatelessWidget {
   Start({super.key});
   final GoRouter _router = GoRouter(
     errorBuilder: (context, state) => ErrorScreen(error: state.error),
@@ -73,7 +122,7 @@ class Start extends StatelessWidget {
         routeInformationParser: _router.routeInformationParser,
         routeInformationProvider: _router.routeInformationProvider,
       );
-}
+}*/
 
 class ErrorScreen extends StatelessWidget {
   final Exception? error;
@@ -87,83 +136,6 @@ class ErrorScreen extends StatelessWidget {
       ),
       body: Center(
         child: Text(error.toString()),
-      ),
-    );
-  }
-}
-
-class GlobalContextService {
-  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-}
-
-class OverlayTest extends StatefulWidget {
-  const OverlayTest({super.key});
-
-  @override
-  State<OverlayTest> createState() => _OverlayTestState();
-}
-
-class _OverlayTestState extends State<OverlayTest> {
-  AnimationController? animationController;
-  List animation = [];
-  List icons = [Icons.home, Icons.settings, Icons.location_city];
-  List colors = [Colors.green, Colors.blueGrey, Colors.purple];
-  OverlayEntry? overlayEntry;
-  GlobalKey globalKey = GlobalKey();
-
-  _showOverLay() async {
-    RenderBox? renderBox =
-        globalKey.currentContext!.findRenderObject() as RenderBox?;
-    Offset offset = renderBox!.localToGlobal(Offset.zero);
-
-    OverlayState? overlayState = Overlay.of(context);
-    overlayEntry = OverlayEntry(
-      builder: (context) => Positioned(
-        left: offset.dx,
-        bottom: renderBox.size.height + 16,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            for (int i = 0; i < animation.length; i++)
-              ScaleTransition(
-                scale: animation[i],
-                child: FloatingActionButton(
-                  onPressed: () {
-                    Fluttertoast.showToast(msg: 'Icon Button Pressed');
-                  },
-                  backgroundColor: colors[i],
-                  mini: true,
-                  child: Icon(
-                    icons[i],
-                  ),
-                ),
-              )
-          ],
-        ),
-      ),
-    );
-    animationController!.addListener(() {
-      overlayState!.setState(() {});
-    });
-    animationController!.forward();
-    overlayState!.insert(overlayEntry!);
-
-    await Future.delayed(const Duration(seconds: 5))
-        .whenComplete(() => animationController!.reverse())
-        .whenComplete(() => overlayEntry!.remove());
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Animated Overlay'),
-      ),
-      floatingActionButton: FloatingActionButton(
-        key: globalKey,
-        onPressed: _showOverLay,
-        child: const Icon(Icons.add),
       ),
     );
   }
