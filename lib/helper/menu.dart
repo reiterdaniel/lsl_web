@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:lsl_web/gallary.dart';
 
-class SideMenu extends StatefulWidget {
+/*class SideMenu extends StatefulWidget {
   const SideMenu({super.key});
   @override
   State<SideMenu> createState() => _SideMenuState();
 }
 
-List<bool> selectedIcon = [true, false, false, false, false];
-
 class _SideMenuState extends State<SideMenu> {
-  GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  List<bool> selectedIcon = [true, false, false, false, false];
 
   List<IconData> icon = [
     Feather.home,
@@ -31,14 +28,17 @@ class _SideMenuState extends State<SideMenu> {
     }
   }
 
+  void selectCurrentScreen(int n) {
+    for (int i = 0; i < 5; i++) {
+      if (i == n) {}
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      //replace with scafold when drawer doesnt needed
-      width: 130.0,
-      elevation: 0.0,
-      backgroundColor: Colors.white,
-      child: Stack(
+    return Scaffold(
+      body: Stack(
+        fit: StackFit.loose,
         children: [
           Container(color: Colors.white),
           Container(
@@ -59,21 +59,25 @@ class _SideMenuState extends State<SideMenu> {
                               onTap: () {
                                 setState(() {
                                   select(icon.indexOf(e));
-                                  if (e == Feather.image) {
-                                    Navigator.pushNamed(context, "/gallary");
-                                  }
+                                  selectCurrentScreen(icon.indexOf(e));
                                 });
                               }))
                           .toList(),
                     ))
               ],
             ),
+          ),
+          Container(
+            //width: 899.0,
+            //alignment: Alignment.centerRight,
+            padding: const EdgeInsets.only(left: 110.0),
+            //child: currentScreen,
           )
         ],
       ),
     );
   }
-}
+}*/
 
 class NavbarItem extends StatefulWidget {
   final IconData icon;
@@ -120,9 +124,13 @@ class _NavbarItemState extends State<NavbarItem> with TickerProviderStateMixin {
     _controller2.addListener(() {
       setState(() {});
     });
+    if (widget.selected) {
+      _controller1.forward();
+      _controller2.forward();
+    }
   }
 
-  @override
+  /*@override
   void didUpdateWidget(NavbarItem oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (!widget.selected) {
@@ -138,7 +146,7 @@ class _NavbarItemState extends State<NavbarItem> with TickerProviderStateMixin {
         //_controller2.forward();
       });
     }
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -147,11 +155,13 @@ class _NavbarItemState extends State<NavbarItem> with TickerProviderStateMixin {
           widget.onTap();
         }),
         child: MouseRegion(
+          // ignore: non_constant_identifier_names
           onEnter: (Value) {
             setState(() {
               hovered = true;
             });
           },
+          // ignore: non_constant_identifier_names
           onExit: (Value) {
             setState(() {
               hovered = false;
