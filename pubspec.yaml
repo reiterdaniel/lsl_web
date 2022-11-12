@@ -40,6 +40,7 @@ dependencies:
   go_router: ^5.0.5
   flutter_vector_icons: ^2.0.0
   fluttertoast: ^8.1.1
+  google_fonts: ^3.0.1
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +65,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/google_fonts/
+    - assets/page_text/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

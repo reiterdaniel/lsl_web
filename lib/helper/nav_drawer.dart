@@ -3,6 +3,7 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:lsl_web/helper/menu.dart';
 import 'package:lsl_web/pages/gallary_page.dart';
 import 'package:lsl_web/pages/main_page.dart';
+import 'package:lsl_web/pages/default_page.dart';
 
 class NavigationDrawer extends StatefulWidget {
   final List<bool> selectedIcon;
@@ -33,7 +34,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         children: [
           Container(color: Colors.transparent),
           Container(
-            margin: const EdgeInsets.all(8.0),
+            //margin: const EdgeInsets.all(8.0),
             height: MediaQuery.of(context).size.height,
             width: 101.0,
             decoration: BoxDecoration(
@@ -60,6 +61,24 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                                         MaterialPageRoute(
                                             builder: ((context) =>
                                                 const Gallary())));
+                                  } else if (icon.indexOf(e) == 2) {
+                                    Navigator.pop(context);
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: ((context) =>
+                                                const DefaultPage())));
+                                  } else if (icon.indexOf(e) == 3) {
+                                    Navigator.pop(context);
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: ((context) =>
+                                                const DefaultPage())));
+                                  } else if (icon.indexOf(e) == 4) {
+                                    Navigator.pop(context);
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: ((context) =>
+                                                const DefaultPage())));
                                   }
                                   //selectCurrentScreen(icon.indexOf(e));
                                 });
