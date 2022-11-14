@@ -3,7 +3,9 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:lsl_web/helper/menu.dart';
 import 'package:lsl_web/pages/gallary_page.dart';
 import 'package:lsl_web/pages/main_page.dart';
-import 'package:lsl_web/pages/default_page.dart';
+import 'package:lsl_web/pages/maps.page.dart';
+import 'package:lsl_web/pages/info_page.dart';
+import 'package:lsl_web/pages/mail_page.dart';
 
 class NavigationDrawer extends StatefulWidget {
   final List<bool> selectedIcon;
@@ -14,8 +16,6 @@ class NavigationDrawer extends StatefulWidget {
 }
 
 class _NavigationDrawerState extends State<NavigationDrawer> {
-  //List<bool> selectedIcon = [false, false, false, false, false];
-
   List<IconData> icon = [
     Feather.home,
     Feather.image,
@@ -38,7 +38,8 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             height: MediaQuery.of(context).size.height,
             width: 101.0,
             decoration: BoxDecoration(
-                color: Colors.amber, borderRadius: BorderRadius.circular(20.0)),
+                color: Colors
+                    .amber /*, borderRadius: BorderRadius.circular(20.0)*/),
             child: Stack(
               children: [
                 Positioned(
@@ -66,19 +67,19 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: ((context) =>
-                                                const DefaultPage())));
+                                                const MapPage())));
                                   } else if (icon.indexOf(e) == 3) {
                                     Navigator.pop(context);
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: ((context) =>
-                                                const DefaultPage())));
+                                                const InfoPage())));
                                   } else if (icon.indexOf(e) == 4) {
                                     Navigator.pop(context);
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: ((context) =>
-                                                const DefaultPage())));
+                                                const MailPage())));
                                   }
                                   //selectCurrentScreen(icon.indexOf(e));
                                 });

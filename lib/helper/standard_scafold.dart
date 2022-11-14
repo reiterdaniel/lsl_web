@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../helper/nav_drawer.dart';
 //import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
@@ -9,7 +8,7 @@ Widget myScaffold(
   myBody ??= const Center(child: Text("No Content at the moment"));
   return Scaffold(
     drawerDragStartBehavior: DragStartBehavior.down,
-    backgroundColor: Colors.amber,
+    backgroundColor: Colors.transparent,
     drawerScrimColor: Colors.transparent,
     appBar: AppBar(
       toolbarHeight: 100.0,
@@ -20,11 +19,11 @@ Widget myScaffold(
       backgroundColor: Colors.redAccent,
       title: Row(children: [
         Expanded(child: Container()),
-        Text(
+        const Text(
           'LackierServiceList',
           //style: GoogleFonts.orbitron(),
         ),
-        Image.asset('images/lackierPistole.png', scale: 2.0)
+        Image.asset('images/lackierPistole.png', scale: 3.5)
       ]),
 
       //removes shadow from expanding side menu

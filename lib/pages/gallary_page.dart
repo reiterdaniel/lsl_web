@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lsl_web/helper/standard_scafold.dart';
 import '../helper/nav_drawer.dart';
 import '../helper/gallary_card.dart';
-import '../helper/standard_scafold.dart';
 
 class Gallary extends StatelessWidget {
   const Gallary({super.key});
@@ -14,7 +13,7 @@ class Gallary extends StatelessWidget {
             selectedIcon: [false, true, false, false, false]),
         GridView.count(
           shrinkWrap: true,
-          crossAxisCount: 2,
+          crossAxisCount: MediaQuery.of(context).size.width > 900 ? 5 : 3,
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
           primary: false,
@@ -39,37 +38,6 @@ class Gallary extends StatelessWidget {
             myGallaryCard('images/test21.jpeg', context),
           ],
         ),
-        context); /*Scaffold(
-      backgroundColor: Colors.transparent,
-      drawerScrimColor: Colors.transparent,
-      appBar: AppBar(
-        shadowColor: Colors.transparent,
-        foregroundColor: Colors.red,
-        surfaceTintColor: Colors.amber,
-        //leading: const Icon(Feather.menu, color: Colors.amberAccent),
-        elevation: 0.0,
-        backgroundColor: Colors.transparent,
-        //removes shadow from expanding side menu
-      ),
-      drawer: const NavigationDrawer(index: 1),
-      body: GridView.count(
-        crossAxisCount: 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        primary: false,
-        children: <Widget>[
-          Image.asset('images/test10.jpeg'),
-          Image.asset('images/test11.jpeg'),
-          Image.asset('images/test12.jpeg'),
-          Image.asset('images/test13.jpeg'),
-          Image.asset('images/test14.jpeg'),
-          Image.asset('images/test15.jpeg'),
-          Image.asset('images/test16.jpeg'),
-          Image.asset('images/test17.jpeg'),
-          Image.asset('images/test18.jpeg'),
-          Image.asset('images/test19.jpeg'),
-        ],
-      ),
-    );*/
+        context);
   }
 }
