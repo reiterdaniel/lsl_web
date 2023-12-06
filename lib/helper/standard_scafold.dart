@@ -1,10 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import '../helper/nav_drawer.dart';
+import 'my_nav_drawer.dart';
 //import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
-Widget myScaffold(
-    NavigationDrawer myDrawer, Widget? myBody, BuildContext context) {
+Widget myScaffold(Widget? myBody, BuildContext context) {
   myBody ??= const Center(child: Text("No Content at the moment"));
   return Scaffold(
     drawerDragStartBehavior: DragStartBehavior.down,
@@ -28,7 +27,6 @@ Widget myScaffold(
 
       //removes shadow from expanding side menu
     ),
-    drawer: myDrawer,
-    body: myBody,
+    body: Container(color: Color.fromARGB(255, 216, 190, 190), child: myBody),
   );
 }

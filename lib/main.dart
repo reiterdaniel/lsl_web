@@ -26,20 +26,15 @@ class App extends StatelessWidget {
     return MaterialApp(
       home: const MainPage(),
       theme: ThemeData(
-          backgroundColor: Colors.green,
           textTheme: TextTheme(
-            titleLarge: GoogleFonts.orbitron(),
-            bodyLarge: GoogleFonts.orbitron(),
-            bodyMedium: GoogleFonts.orbitron(),
-            bodySmall: GoogleFonts.orbitron(),
-            /*bodyText1: GoogleFonts.orbitron(),
-        bodyText2: GoogleFonts.orbitron(),
-        caption: GoogleFonts.orbitron(),
-        button: GoogleFonts.orbitron(),
+        titleLarge: GoogleFonts.orbitron(),
+        bodyLarge: GoogleFonts.orbitron(),
+        bodyMedium: GoogleFonts.orbitron(),
+        bodySmall: GoogleFonts.orbitron(),
         labelLarge: GoogleFonts.orbitron(),
         labelMedium: GoogleFonts.orbitron(),
-        labelSmall: GoogleFonts.orbitron(),*/
-          )),
+        labelSmall: GoogleFonts.orbitron(),
+      )),
     );
   }
 }

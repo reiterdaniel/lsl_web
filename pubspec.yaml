@@ -41,6 +41,8 @@ dependencies:
   flutter_vector_icons: ^2.0.0
   fluttertoast: ^8.1.1
   google_fonts: ^3.0.1
+  flutter_inset_box_shadow: ^1.0.8
+  flutter_neumorphic: ^3.2.0
 
 dev_dependencies:
   flutter_test:

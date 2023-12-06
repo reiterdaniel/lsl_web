@@ -1,6 +1,6 @@
 //import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import '../helper/nav_drawer.dart';
+import '../helper/my_nav_drawer.dart';
 import '../helper/standard_scafold.dart';
 //import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
@@ -15,10 +15,7 @@ class _DefaultPageState extends State<DefaultPage> {
   @override
   Widget build(BuildContext context) {
     //Scaffold.of(context).openDrawer();
-    return myScaffold(
-        const NavigationDrawer(selectedIcon: [false, false, true, true, true]),
-        null,
-        context); /*Scaffold(
+    return Placeholder(); /*Scaffold(
       drawerDragStartBehavior: DragStartBehavior.down,
       backgroundColor: Colors.transparent,
       drawerScrimColor: Colors.transparent,
